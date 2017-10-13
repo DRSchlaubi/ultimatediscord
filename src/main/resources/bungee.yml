@@ -1,0 +1,7 @@
+name: UltimateDiscord
+version: 1.0
+author: Schlaubi
+main: net.schlaubi.ultimatediscord.bungee.Main
+commands:
+  discord:
+    description: COMMAND!!

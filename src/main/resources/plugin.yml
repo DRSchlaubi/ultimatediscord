@@ -1,0 +1,8 @@
+name: UltimateDiscord
+version: 1.0
+author: Schlaubi
+main: net.schlaubi.ultimatediscord.spigot.Main
+depend: [Vault]
+commands:
+  discord:
+    description: Discord command
