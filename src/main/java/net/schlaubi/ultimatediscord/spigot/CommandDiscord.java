@@ -8,17 +8,15 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabExecutor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
-public class CommandDiscord implements CommandExecutor {
+public class CommandDiscord implements CommandExecutor, TabExecutor {
 
     public static HashMap<String, String> users = new HashMap<>();
 
@@ -100,5 +98,22 @@ public class CommandDiscord implements CommandExecutor {
         }
 
         return false;
+    }
+
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command name, String lable, String[] args) {
+        String[] subcommands = {"reload", "verify", "unlink", "update"};
+        if(args.length > 1 || args.length == 0){
+            return  Arrays.asList(subcommands);
+        }
+        if(args.length > 0){
+            List<String> matches = new ArrayList<>();
+            for (String subcommand : subcommands){
+                if(subcommand.startsWith(args[0]))
+                    matches.add(subcommand);
+            }
+            return matches;
+        }
+        return null;
     }
 }

@@ -1,22 +1,21 @@
 package net.schlaubi.ultimatediscord.bungee;
 
+import com.google.common.collect.ImmutableSet;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.managers.GuildController;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
+import net.md_5.bungee.api.plugin.TabExecutor;
 import net.md_5.bungee.config.Configuration;
 import net.schlaubi.ultimatediscord.util.MySQL;
 
 
-import java.util.Timer;
-import java.util.HashMap;
-import java.util.Random;
-import java.util.TimerTask;
+import java.util.*;
 
 
-public class CommandDiscord extends Command {
+public class CommandDiscord extends Command implements TabExecutor{
 
     public static HashMap<String, String> users = new HashMap<>();
     private GuildController guild = new GuildController(Main.jda.getGuilds().get(0));
@@ -105,5 +104,21 @@ public class CommandDiscord extends Command {
             ProxyServer.getInstance().getConsole().sendMessage("§4§lYou must be a player to run this command");
         }
 
+    }
+
+    @Override
+    public Iterable<String> onTabComplete(CommandSender sender, String[] args) {
+        if(args.length > 1 || args.length == 0)
+            return ImmutableSet.of();
+        String[] subcommands = {"reload", "verify", "unlink", "update"};
+        Set<String> matches = new HashSet<>();
+        if(args.length > 0){
+            for (String subcommand : subcommands){
+                if(subcommand.startsWith(args[0]))
+                    matches.add(subcommand);
+            }
+            return matches;
+        }
+        return null;
     }
 }
