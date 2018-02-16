@@ -45,11 +45,11 @@ public class Main extends JavaPlugin {
         JDABuilder bot = new JDABuilder(AccountType.BOT);
         bot.setAutoReconnect(true);
         bot.setToken(cfg.getString("Discord.token"));
-        bot.setGame(Game.of(cfg.getString("Discord.game")));
+        bot.setGame(Game.playing(cfg.getString("Discord.game")));
         bot.addEventListener(new MessageListener());
         try {
             jda = bot.buildBlocking();
-        } catch (LoginException | InterruptedException | RateLimitedException e) {
+        } catch (LoginException | InterruptedException e) {
             Bukkit.getConsoleSender().sendMessage("§4§l[UltimateDiscord] Invalid discord token");
             e.printStackTrace();
         }
