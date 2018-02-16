@@ -34,7 +34,7 @@ public class MessageListener extends ListenerAdapter {
     public void onMessageReceived(MessageReceivedEvent event) {
         FileConfiguration cfg = Main.getConfiguration();
         if(event.isFromType(ChannelType.PRIVATE)){
-            String message = event.getMessage().getContent();
+            String message = event.getMessage().getContentDisplay();
             String[] args = message.split(" ");
             JDA jda = event.getJDA();
             if(args[0].equalsIgnoreCase("!verify")) {

@@ -34,7 +34,7 @@ public class MessageListener extends ListenerAdapter{
         Configuration cfg = Main.getConfiguration();
         if(event.isFromType(ChannelType.PRIVATE)){
             JDA jda = event.getJDA();
-            String message = event.getMessage().getContent();
+            String message = event.getMessage().getContentDisplay();
             String[] args = message.split(" ");
             if(message.startsWith("!roles")){
                 StringBuilder sb = new StringBuilder();
